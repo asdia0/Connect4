@@ -1,6 +1,7 @@
 ﻿namespace Connect4
 {
     using System;
+
     public class Move
     {
         public int X;
@@ -23,7 +24,7 @@
 
         public override string ToString()
         {
-            return $"Player {this.Player}: {(this.X + 1, this.Y + 1)}";
+            return $"{this.X}";
         }
     }
 }

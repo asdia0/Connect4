@@ -1,7 +1,9 @@
 ﻿namespace Connect4
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Grid
     {
@@ -20,6 +22,18 @@
             for (int id = 0; id < this.Tokens.Length; id++)
             {
                 this.Tokens[id] = new Token(id);
+            }
+        }
+
+        public Grid(Grid grid)
+        {
+            this.Tokens = new Token[grid.Tokens.Length];
+            this.Length = grid.Length;
+            this.Breadth = grid.Breadth;
+
+            for (int i = 0; i < grid.Tokens.Count(); i++)
+            {
+                this.Tokens[i] = new Token(grid.Tokens[i]);
             }
         }
 

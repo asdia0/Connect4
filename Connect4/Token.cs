@@ -10,5 +10,11 @@
         {
             this.ID = id; ;
         }
+
+        public Token(Token token)
+        {
+            this.Player = token.Player;
+            this.ID = token.ID;
+        }
     }
 }

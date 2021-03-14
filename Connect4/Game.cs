@@ -31,7 +31,22 @@
             this.ToWin = toWin;
         }
 
-        public void Move(int column)
+        public Game(Game game)
+        {
+            this.ToWin = game.ToWin;
+            this.Players = game.Players;
+            this.Turn = 0;
+            this.Grid = new Grid(game.Grid.Length, game.Grid.Breadth);
+
+            this.MoveList = new List<Move>();
+
+            foreach (char c in game.ToString())
+            {
+                this.Play(int.Parse(c.ToString()));
+            }
+        }
+
+        public void Play(int column)
         {
             int[] tokens = new int[this.Grid.Breadth];
 
@@ -56,6 +71,31 @@
             }
 
             throw new Exception("Column is full.");
+        }
+
+        public void Undo(int column)
+        {
+            int[] tokens = new int[this.Grid.Breadth];
+
+            for (int row = 0; row < this.Grid.Breadth; row++)
+            {
+                tokens[row] = (row * this.Grid.Length) + column;
+            }
+
+            foreach (int id in tokens.Reverse())
+            {
+                if (this.Grid.Tokens[id].Player != null)
+                {
+                    this.Grid.Tokens[id].Player = null;
+                    this.MoveList.RemoveAt(MoveList.Count - 1);
+                    this.Turn--;
+                    if (this.Turn == 0)
+                    {
+                        this.Turn = this.Players;
+                    }
+                    return;
+                }
+            }
         }
 
         public int? Winner()
@@ -89,6 +129,54 @@
             }
 
             return null;
+        }
+
+        public bool Draw()
+        {
+            if (this.MoveList.Count == this.Grid.Breadth * this.Grid.Length)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override string ToString()
+        {
+            string s = string.Empty;
+
+            foreach (Move move in this.MoveList)
+            {
+                s += move.ToString();
+            }
+
+            return s;
+        }
+
+        public bool CanPlay(int col)
+        {
+            try
+            {
+                Game g = new Game(this);
+                g.Play(col);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool WinningMove(int col)
+        {
+            Game g = new Game(this);
+            g.Play(col);
+            if (g.Winner() != null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
