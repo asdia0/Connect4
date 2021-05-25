@@ -98,7 +98,7 @@
             }
         }
 
-        public int? Winner()
+        public int? GetWinner()
         {
             List<List<int>> streaks = this.Grid.GetColumns(this.ToWin).Union(this.Grid.GetRows(this.ToWin).Union(this.Grid.GetDiagonals(this.ToWin))).ToList();
 
@@ -131,7 +131,7 @@
             return null;
         }
 
-        public bool Draw()
+        public bool IsDraw()
         {
             if (this.MoveList.Count == this.Grid.Breadth * this.Grid.Length)
             {
@@ -153,12 +153,12 @@
             return s;
         }
 
-        public bool CanPlay(int col)
+        public bool IsFilled(int column)
         {
             try
             {
                 Game g = new Game(this);
-                g.Play(col);
+                g.Play(column);
                 return true;
             }
             catch
@@ -167,11 +167,11 @@
             }
         }
 
-        public bool WinningMove(int col)
+        public bool IsWinningMove(int column)
         {
             Game g = new Game(this);
-            g.Play(col);
-            if (g.Winner() != null)
+            g.Play(column);
+            if (g.GetWinner() != null)
             {
                 return true;
             }

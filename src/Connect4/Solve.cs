@@ -58,7 +58,7 @@
 
             Grid grid = game.Grid;
 
-            if (game.Draw())
+            if (game.IsDraw())
             {
                 return 0;
             }
@@ -66,7 +66,7 @@
             // Player can win immediately
             for (int x = 0; x < grid.Length; x++)
             {
-                if (game.CanPlay(x) && game.WinningMove(x))
+                if (game.IsFilled(x) && game.IsWinningMove(x))
                 {
                     return (grid.Length * grid.Breadth + 1 - game.MoveList.Count) / 2;
                 }
@@ -88,7 +88,7 @@
             // Get child scores
             for (int x = 0; x < grid.Length; x++)
             {
-                if (game.CanPlay(ColumnOrder[x]))
+                if (game.IsFilled(ColumnOrder[x]))
                 {
                     game.Play(ColumnOrder[x]);
 
