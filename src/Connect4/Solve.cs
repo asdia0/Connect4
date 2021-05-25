@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Text.Json;
 
     class Program
     {
@@ -13,7 +12,7 @@
 
         public static Dictionary<string, int> Moves = new Dictionary<string, int>();
 
-        public static void SortColumnOrder(int length)
+        private static void SortColumnOrder(int length)
         {
             ColumnOrder = new int[length];
             for (int i = 0; i < length; i++)
@@ -57,7 +56,6 @@
 
             nodeCount++;
 
-            Console.WriteLine($"Node {nodeCount} (Depth {game.MoveList.Count})");
             Grid grid = game.Grid;
 
             if (game.Draw())
