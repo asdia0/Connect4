@@ -1,7 +1,6 @@
 ﻿namespace Connect4
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -15,6 +14,11 @@
 
         public Grid(int length, int breadth)
         {
+            if (length < 1 || breadth < 1)
+            {
+                throw new Exception("The dimensions of the grid must be at least 1.");
+            }
+
             this.Length = length;
             this.Breadth = breadth;
             this.Tokens = new Token[length * breadth];
