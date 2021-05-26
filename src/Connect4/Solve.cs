@@ -4,13 +4,11 @@
     using System.Linq;
     using System.Collections.Generic;
 
-    class Program
+    public class Solve
     {
-        public static int nodeCount;
+        private static int[] ColumnOrder;
 
-        public static int[] ColumnOrder;
-
-        public static Dictionary<string, int> Moves = new Dictionary<string, int>();
+        private static Dictionary<string, int> Moves = new Dictionary<string, int>();
 
         private static void SortColumnOrder(int length)
         {
@@ -21,40 +19,9 @@
             }
         }
 
-        public static int FindBestColumn(int length, int breadth, int toWin)
-        {
-            Game g = new Game(new Grid(length, breadth), 2, toWin);
-
-            Moves.Clear();
-
-            SortColumnOrder(length);
-
-            int score = NegaMax(g, int.MinValue, int.MaxValue, 0);
-
-            Dictionary<int, int> firstMoves = new Dictionary<int, int>();
-            for (int i = 0; i < length; i++)
-            {
-                if (Moves.Keys.Contains($"{g}{i}"))
-                {
-                    firstMoves.Add(i, Moves[$"{g}{i}"]);
-                }
-            }
-
-            if (g.Turn % 2 == 0)
-            {
-                return firstMoves.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
-            }
-            else
-            {
-                return firstMoves.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
-            }
-        }
-
-        public static int NegaMax(Game game, int alpha, int beta, int depth)
+        private static int NegaMax(Game game, int alpha, int beta, int depth)
         {
             // Credits to http://blog.gamesolver.org/solving-connect-four/04-alphabeta/
-
-            nodeCount++;
 
             Grid grid = game.Grid;
 
@@ -74,7 +41,7 @@
 
             // Upper bound of score
             int max = (grid.Length * grid.Breadth - 1 - game.MoveList.Count) / 2;
-            
+
             // Configure beta
             if (beta > max)
             {
@@ -116,6 +83,35 @@
             }
 
             return alpha;
+        }
+
+        public static int FindBestColumn(int length, int breadth, int toWin)
+        {
+            Game g = new Game(new Grid(length, breadth), 2, toWin);
+
+            Moves.Clear();
+
+            SortColumnOrder(length);
+
+            int score = NegaMax(g, int.MinValue, int.MaxValue, 0);
+
+            Dictionary<int, int> firstMoves = new Dictionary<int, int>();
+            for (int i = 0; i < length; i++)
+            {
+                if (Moves.Keys.Contains($"{g}{i}"))
+                {
+                    firstMoves.Add(i, Moves[$"{g}{i}"]);
+                }
+            }
+
+            if (g.Turn % 2 == 0)
+            {
+                return firstMoves.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
+            }
+            else
+            {
+                return firstMoves.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+            }
         }
     }
 }
