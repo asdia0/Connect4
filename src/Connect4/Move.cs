@@ -4,9 +4,7 @@
 
     public class Move
     {
-        public int X;
-        public int Y;
-
+        public (int X, int Y) Coordinates;
         public int Player;
 
         public Move(Grid grid, Token token)
@@ -16,15 +14,15 @@
                 throw new Exception("Token.Player must not be null.");
             }
 
-            this.X = token.ID % grid.Length;
-            this.Y = grid.Breadth - (int)Math.Floor(decimal.Divide(token.ID, grid.Breadth));
+            this.Coordinates.X = token.ID % grid.Length;
+            this.Coordinates.Y = grid.Breadth - (int)Math.Floor(decimal.Divide(token.ID, grid.Breadth));
 
             this.Player = (int)token.Player;
         }
 
         public override string ToString()
         {
-            return $"{this.X}";
+            return this.Coordinates.ToString();
         }
     }
 }
