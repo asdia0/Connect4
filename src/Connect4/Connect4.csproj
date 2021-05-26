@@ -5,11 +5,20 @@
     <TargetFramework>net5.0</TargetFramework>
     <Authors>asdia0</Authors>
     <Company />
-    <Description>Finds the best move in a game of Connect 4 using a NegaMax algorithm.</Description>
-    <PackageProjectUrl>https://github.com/asdia0/Connect4</PackageProjectUrl>
+    <Description>A C# library to play and solve Connect 4.</Description>
+    <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/asdia0/Connect4</RepositoryUrl>
     <PackageTags>connect4</PackageTags>
-    <PackageId>Connect4.NET</PackageId>
+    <PackageId>Asdia0.Connect4</PackageId>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
