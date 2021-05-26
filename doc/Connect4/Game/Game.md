@@ -12,8 +12,8 @@ public class Game
 ## Constructors
 | Constructor | Description |
 | ----------- | ----------- |
-| [`Game(Grid, int, int)`](Constructor/Game(Grid,%20int,%20int).md) | Intialises a new instance of the Game class. |
-| [`Game(Game)`](Constructor/Game(Game).md) | Clones an instance of the Game class. |
+| [Game(Grid, int, int)](Constructor/Game(Grid,%20int,%20int).md) | Intialises a new instance of the Game class. |
+| [Game(Game)](Constructor/Game(Game).md) | Clones an instance of the Game class. |
 
 ## Fields
 | Field | Description |
