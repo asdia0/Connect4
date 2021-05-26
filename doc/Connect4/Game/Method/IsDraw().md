@@ -11,5 +11,5 @@ public bool IsDraw()
 ```
 
 ## Returns
-bool
+bool  
 `true` if the game has ended in a draw, `false` if otherwise. 
