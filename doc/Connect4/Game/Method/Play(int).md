@@ -11,5 +11,5 @@ public void Play(int column)
 ```
 
 ## Parameters
-`column`: int
+`column`: int  
 The column ID to add a [token](../../Token/Token.md) to.
