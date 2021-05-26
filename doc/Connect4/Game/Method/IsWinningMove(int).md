@@ -11,7 +11,7 @@ public bool IsWinningMove(int column)
 ```
 
 ## Parameters
-`column`: int
+`column`: int  
 The column ID to check.
 
 ## Returns
