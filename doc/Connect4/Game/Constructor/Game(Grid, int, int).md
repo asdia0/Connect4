@@ -15,7 +15,7 @@ public Game(Grid grid, int players, int toWin)
 The grid where the game is taking place.
 
 
-`players``: int
+`players`: int
 The number of players in the game.
 
 `toWin`: int
