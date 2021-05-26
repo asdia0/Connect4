@@ -3,6 +3,13 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>asdia0</Authors>
+    <Company />
+    <Description>Finds the best move in a game of Connect 4 using a NegaMax algorithm.</Description>
+    <PackageProjectUrl>https://github.com/asdia0/Connect4</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/asdia0/Connect4</RepositoryUrl>
+    <PackageTags>connect4</PackageTags>
+    <PackageId>Connect4.NET</PackageId>
   </PropertyGroup>
 
 </Project>
