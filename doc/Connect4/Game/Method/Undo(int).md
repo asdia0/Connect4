@@ -11,5 +11,5 @@ public void Undo(int column)
 ```
 
 ## Parameters
-`column`: int
+`column`: int  
 The column ID to remove a [token](../../Token/Token.md) from.
