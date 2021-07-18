@@ -94,9 +94,9 @@
             List<List<int>> result = new List<List<int>>();
 
             // Positive diagonals
-            for (int x = 0; x < this.Length - length + 1; x++)
+            for (int x = 0; x < this.Length - (length - 1); x++)
             {
-                for (int y = 0; y < this.Breadth - length + 1; y++)
+                for (int y = 0; y < this.Breadth - (length - 1); y++)
                 {
                     int startID = (y * this.Length) + x;
 
@@ -112,9 +112,9 @@
             }
 
             // Negative diagonals
-            for (int x = this.Length - length + 1; x <= this.Length; x++)
+            for (int y = 0; y < this.Breadth - (length - 1); y++)
             {
-                for (int y = 0; y < this.Breadth - length + 1; y++)
+                for (int x = length - 1; x < this.Length; x++)
                 {
                     int startID = (y * this.Length) + x;
 
