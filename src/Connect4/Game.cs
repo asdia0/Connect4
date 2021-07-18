@@ -68,8 +68,7 @@
             this.ToWin = game.ToWin;
             this.Players = game.Players;
             this.Grid = new Grid(game.Grid.Length, game.Grid.Breadth);
-
-            this.MoveList = new List<Move>();
+            this.MoveList = new();
 
             foreach (char c in game.ToString())
             {
