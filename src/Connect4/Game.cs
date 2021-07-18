@@ -26,7 +26,7 @@
         {
             get
             {
-                if (this.Winner != null)
+                if (this.Winner != null || this.Draw)
                 {
                     return null;
                 }
