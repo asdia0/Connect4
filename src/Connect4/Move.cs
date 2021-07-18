@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            return this.Coordinates.ToString();
+            return this.Coordinates.X.ToString();
         }
     }
 }
