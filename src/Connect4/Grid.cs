@@ -4,14 +4,31 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Represents a grid.
+    /// </summary>
     public class Grid
     {
+        /// <summary>
+        /// Gets or sets the tokens on the grid.
+        /// </summary>
         public Token[] Tokens { get; set; }
 
+        /// <summary>
+        /// Gets or sets the grid's length.
+        /// </summary>
         public int Length { get; set; }
 
+        /// <summary>
+        /// Gets or sets the grid's breadth.
+        /// </summary>
         public int Breadth { get; set; }
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Grid"/> class.
+        /// </summary>
+        /// <param name="length">The grid's length.</param>
+        /// <param name="breadth">The grid's breadth.</param>
         public Grid(int length, int breadth)
         {
             if (length < 1 || breadth < 1)
@@ -29,6 +46,10 @@
             }
         }
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Grid"/> class from another grid.
+        /// </summary>
+        /// <param name="grid">The grid to clone.</param>
         public Grid(Grid grid)
         {
             this.Tokens = new Token[grid.Tokens.Length];
@@ -41,6 +62,11 @@
             }
         }
 
+        /// <summary>
+        /// Gets a list of columns of a certain length.
+        /// </summary>
+        /// <param name="length">The length of the columns to find.</param>
+        /// <returns>A list of columns of a certain length.</returns>
         public List<List<int>> GetColumns(int length)
         {
             List<List<int>> result = new();
@@ -65,6 +91,11 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets a list of rows of a certain length.
+        /// </summary>
+        /// <param name="length">The length of the rows to find.</param>
+        /// <returns>A list of rows of a certain length.</returns>
         public List<List<int>> GetRows(int length)
         {
             List<List<int>> result = new();
@@ -89,6 +120,11 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets a list of diagonals of a certain length.
+        /// </summary>
+        /// <param name="length">The length of the diagonals to find.</param>
+        /// <returns>A list of diagonals of a certain length.</returns>
         public List<List<int>> GetDiagonals(int length)
         {
             List<List<int>> result = new();
@@ -132,6 +168,10 @@
             return result;
         }
 
+        /// <summary>
+        /// Converts the grid into a string.
+        /// </summary>
+        /// <returns>The string version of the grid.</returns>
         public override string ToString()
         {
             string s = string.Empty;
