@@ -176,5 +176,27 @@ namespace Connect4.Test
 
             Assert.AreEqual(false, game.IsFilled(0));
         }
+
+        [TestMethod]
+        public void IsWinningMoveTrue()
+        {
+            Grid grid = new(2, 2);
+            Game game = new(grid, 2, 2);
+            game.Play(0);
+            game.Play(1);
+
+            Assert.AreEqual(true, game.IsWinningMove(0));
+        }
+
+        [TestMethod]
+        public void IsWinningMoveFalse()
+        {
+            Grid grid = new(3, 3);
+            Game game = new(grid, 2, 2);
+            game.Play(0);
+            game.Play(0);
+
+            Assert.AreEqual(false, game.IsWinningMove(1));
+        }
     }
 }
