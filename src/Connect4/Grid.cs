@@ -71,9 +71,9 @@
 
             for (int x = 0; x < this.Breadth; x++)
             {
-                for (int y = 0; y < this.Length - length + 1; y++)
+                for (int y = 0; y < this.Length - (length - 1); y++)
                 {
-                    int startID = (y * this.Length) + x;
+                    int startID = (x * this.Length) + y;
 
                     List<int> row = new List<int>();
 
