@@ -37,5 +37,14 @@ namespace Connect4.Test
 
             Assert.AreEqual(2, game.Players);
         }
+
+        [TestMethod]
+        public void Grid()
+        {
+            Grid grid = new(2, 2);
+            Game game = new(grid, 2, 2);
+
+            Assert.AreEqual(grid, game.Grid);
+        }
     }
 }
