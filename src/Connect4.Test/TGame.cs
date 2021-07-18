@@ -91,11 +91,27 @@ namespace Connect4.Test
 
             Assert.AreEqual(0, game.Turn);
 
-            game.Play(0);
+            Assert.AreEqual(2, game.MoveList.Count);
+        }
 
-            Assert.AreEqual(1, game.Turn);
+        [TestMethod]
+        public void GameGameWinner()
+        {
+            Grid grid = new(2, 2);
+            Game clone = new(grid, 2, 2);
+            clone.Play(1);
+            clone.Play(0);
+            clone.Play(1);
+            Game game = new(clone);
 
+            Assert.AreEqual(grid.Length, game.Grid.Length);
+            Assert.AreEqual(grid.Breadth, game.Grid.Breadth);
+            Assert.AreEqual(grid.Tokens.Length, game.Grid.Tokens.Length);
+            Assert.AreEqual(2, game.ToWin);
+            Assert.AreEqual(2, game.Players);
             Assert.AreEqual(3, game.MoveList.Count);
+            Assert.AreEqual(null, game.Turn);
+            Assert.AreEqual(0, game.Winner);
         }
     }
 }
