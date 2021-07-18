@@ -31,6 +31,10 @@ namespace Connect4.Test
             Assert.AreEqual(0, game.Turn);
 
             Assert.AreEqual(2, game.MoveList.Count);
+
+            game.Play(0);
+
+            Assert.AreEqual(0, game.Winner);
         }
 
         [TestMethod]
