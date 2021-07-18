@@ -25,7 +25,7 @@
 
             Grid grid = game.Grid;
 
-            if (game.IsDraw())
+            if (game.Draw)
             {
                 return 0;
             }

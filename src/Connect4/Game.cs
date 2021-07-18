@@ -85,6 +85,22 @@
         }
 
         /// <summary>
+        /// Gets a value determining if the game is a draw.
+        /// </summary>
+        public bool Draw
+        {
+            get
+            {
+                if (this.MoveList.Count == this.Grid.Breadth * this.Grid.Length)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Initialises a new instance of the <see cref="Game"/> class.
         /// </summary>
         /// <param name="grid">The grid the game is being played on.</param>
@@ -168,20 +184,6 @@
                     return;
                 }
             }
-        }
-
-        /// <summary>
-        /// Determines if the game is a draw.
-        /// </summary>
-        /// <returns>A value determining if the game is a draw.</returns>
-        public bool IsDraw()
-        {
-            if (this.MoveList.Count == this.Grid.Breadth * this.Grid.Length)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         /// <summary>
