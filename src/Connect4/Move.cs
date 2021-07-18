@@ -5,6 +5,7 @@
     public class Move
     {
         public (int X, int Y) Coordinates { get; set; }
+
         public int Player { get; set; }
 
         public Move(Grid grid, Token token)
