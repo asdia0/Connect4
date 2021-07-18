@@ -46,5 +46,13 @@ namespace Connect4.Test
 
             Assert.AreEqual(grid, game.Grid);
         }
+
+        [TestMethod]
+        public void MoveList()
+        {
+            Game game = new(new(2, 2), 2, 2);
+
+            CollectionAssert.AreEquivalent(new List<int>(), game.MoveList);
+        }
     }
 }
