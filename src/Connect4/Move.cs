@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class Move
+    public struct Move
     {
         public (int X, int Y) Coordinates { get; set; }
 
