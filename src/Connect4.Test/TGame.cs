@@ -1,6 +1,6 @@
 namespace Connect4.Test
 {
-    using System.Collections.Generic;
+    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -112,6 +112,19 @@ namespace Connect4.Test
             Assert.AreEqual(3, game.MoveList.Count);
             Assert.AreEqual(null, game.Turn);
             Assert.AreEqual(0, game.Winner);
+        }
+
+        [TestMethod]
+        public void Play()
+        {
+            Grid grid = new(2, 2);
+            Game game = new(grid, 2, 2);
+
+            game.Play(0);
+
+            Assert.AreEqual(1, game.MoveList.Count);
+            Assert.AreEqual(1, game.Turn);
+            Assert.AreEqual(0, game.Grid.Tokens[2].Player);
         }
     }
 }
