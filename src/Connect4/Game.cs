@@ -20,7 +20,7 @@
         public int Players { get; set; }
 
         /// <summary>
-        /// Gets or sets the ID of the current player.
+        /// Gets the ID of the current player.
         /// </summary>
         public int Turn
         {
