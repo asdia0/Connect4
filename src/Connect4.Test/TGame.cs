@@ -99,5 +99,19 @@ namespace Connect4.Test
             Assert.AreEqual(1, game.Turn);
             Assert.AreEqual(0, game.Grid.Tokens[2].Player);
         }
+
+        [TestMethod]
+        public void Undo()
+        {
+            Grid grid = new(2, 2);
+            Game game = new(grid, 2, 2);
+
+            game.Play(0);
+            game.Undo(0);
+
+            Assert.AreEqual(0, game.MoveList.Count);
+            Assert.AreEqual(0, game.Turn);
+            Assert.AreEqual(null, game.Grid.Tokens[2].Player);
+        }
     }
 }
