@@ -87,7 +87,6 @@ namespace Connect4.Test
             Assert.AreEqual(0, game.Winner);
         }
 
-
         [TestMethod]
         public void GameGameDraw()
         {
