@@ -22,10 +22,15 @@
         /// <summary>
         /// Gets the ID of the current player.
         /// </summary>
-        public int Turn
+        public int? Turn
         {
             get
             {
+                if (this.Winner != null)
+                {
+                    return null;
+                }
+
                 return this.MoveList.Count % this.Players;
             }
         }
