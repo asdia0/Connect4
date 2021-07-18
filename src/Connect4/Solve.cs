@@ -5,9 +5,20 @@
     using System.Linq;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// This class contains methods to find the move.
+    /// </summary>
     public static class Solve
     {
-        private static (int?, int) MiniMax(Game game, int depth, int alpha, int beta)
+        /// <summary>
+        /// An implementation of the alpha-beta pruning algorithm.
+        /// </summary>
+        /// <param name="game">The position to solve.</param>
+        /// <param name="depth">The amount of full moves to search through.</param>
+        /// <param name="alpha">The value of alpha (maximising player).</param>
+        /// <param name="beta">The value of beta (minimising player).</param>
+        /// <returns></returns>
+        private static (int?, int) AlphaBetaPruning(Game game, int depth, int alpha, int beta)
         {
             bool maxPlayer = game.Turn % 2 == 0;
 
@@ -48,7 +59,7 @@
                 {
                     Game opp = new(game);
                     opp.Play(child);
-                    int score = MiniMax(opp, depth - 1, alpha, beta).Item2;
+                    int score = AlphaBetaPruning(opp, depth - 1, alpha, beta).Item2;
                     scores.Add(child, score);
                     if (score > value)
                     {
@@ -71,7 +82,7 @@
                 {
                     Game opp = new(game);
                     opp.Play(child);
-                    int score = MiniMax(opp, depth - 1, alpha, beta).Item2;
+                    int score = AlphaBetaPruning(opp, depth - 1, alpha, beta).Item2;
                     scores.Add(child, score);
                     if (score < value)
                     {
@@ -87,6 +98,12 @@
             }
         }
 
+        /// <summary>
+        /// Finds the best move from a given position.
+        /// </summary>
+        /// <param name="g">The position to find the best move in.</param>
+        /// <param name="depth">The amount of full moves to search.</param>
+        /// <returns>(Column to search in, the column's score)</returns>
         public static (int?, int) FindBestColumn(Game g, int depth)
         {
             if (g.Draw || g.Winner != null || g.Players != 2)
@@ -94,7 +111,7 @@
                 throw new Exception("Invalid game");
             }
 
-            (int?, int) eval = MiniMax(g, 2 * depth, int.MinValue, int.MaxValue);
+            (int?, int) eval = AlphaBetaPruning(g, 2 * depth, int.MinValue, int.MaxValue);
 
             return eval;
         }
