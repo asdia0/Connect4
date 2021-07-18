@@ -8,12 +8,12 @@
     public struct Move
     {
         /// <summary>
-        /// The coordinates of the token placed.
+        /// Gets or sets the coordinates of the token placed.
         /// </summary>
         public (int X, int Y) Coordinates { get; set; }
 
         /// <summary>
-        /// The player that made the move.
+        /// Gets or sets the player that made the move.
         /// </summary>
         public int Player { get; set; }
 
