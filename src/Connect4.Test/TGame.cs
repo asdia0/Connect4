@@ -7,9 +7,18 @@ namespace Connect4.Test
     public class TGame
     {
         [TestMethod]
-        public void Turn()
+        public void GameGridIntInt()
         {
-            Game game = new(new(2, 2), 2, 2);
+            Grid grid = new(2, 2);
+            Game game = new(grid, 2, 2);
+
+            Assert.AreEqual(grid, game.Grid);
+
+            Assert.AreEqual(2, game.ToWin);
+
+            Assert.AreEqual(2, game.Players);
+
+            Assert.AreEqual(0, game.MoveList.Count);
 
             Assert.AreEqual(0, game.Turn);
 
@@ -20,39 +29,8 @@ namespace Connect4.Test
             game.Play(1);
 
             Assert.AreEqual(0, game.Turn);
-        }
 
-        [TestMethod]
-        public void ToWin()
-        {
-            Game game = new(new(2, 2), 2, 2);
-
-            Assert.AreEqual(2, game.ToWin);
-        }
-
-        [TestMethod]
-        public void Players()
-        {
-            Game game = new(new(2, 2), 2, 2);
-
-            Assert.AreEqual(2, game.Players);
-        }
-
-        [TestMethod]
-        public void Grid()
-        {
-            Grid grid = new(2, 2);
-            Game game = new(grid, 2, 2);
-
-            Assert.AreEqual(grid, game.Grid);
-        }
-
-        [TestMethod]
-        public void MoveList()
-        {
-            Game game = new(new(2, 2), 2, 2);
-
-            CollectionAssert.AreEquivalent(new List<int>(), game.MoveList);
+            Assert.AreEqual(2, game.MoveList.Count);
         }
     }
 }
