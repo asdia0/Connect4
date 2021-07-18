@@ -221,6 +221,11 @@
             return g.Winner != null;
         }
 
+        /// <summary>
+        /// Gets the evaluation of the position from the perspective of a certain player.
+        /// </summary>
+        /// <param name="player">The player to get the evaluation of.</param>
+        /// <returns>A value representing the position's evaluation from the persepective of a certain player.</returns>
         public int Evaluation(int player)
         {
             List<List<int>> streaks = this.Grid.GetColumns(this.ToWin).Union(this.Grid.GetRows(this.ToWin).Union(this.Grid.GetDiagonals(this.ToWin))).ToList();
