@@ -59,24 +59,10 @@
                     int counter = 0;
                     foreach (int id in streak)
                     {
-                        int? player = this.Grid.Tokens[id].Player;
-                        if (player == null)
+                        if (streak.Select(i => this.Grid.Tokens[i].Player).Distinct().Count() == 1)
                         {
-                            break;
+                            return this.Grid.Tokens[streak[0]].Player;
                         }
-                        else if (player != this.Grid.Tokens[streak[0]].Player)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            counter++;
-                        }
-                    }
-
-                    if (counter == this.ToWin)
-                    {
-                        return this.Grid.Tokens[streak[0]].Player;
                     }
                 }
 
@@ -228,12 +214,7 @@
         {
             Game g = new Game(this);
             g.Play(column);
-            if (g.Winner != null)
-            {
-                return true;
-            }
-
-            return false;
+            return g.Winner != null;
         }
     }
 }
