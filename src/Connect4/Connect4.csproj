@@ -12,6 +12,11 @@
     <PackageId>Asdia0.Connect4</PackageId>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>- Optimised code
+- Improved the alpha-beta pruning algorithm
+- Fixed various bugs</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
