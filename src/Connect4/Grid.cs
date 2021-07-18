@@ -35,7 +35,7 @@
             this.Length = grid.Length;
             this.Breadth = grid.Breadth;
 
-            for (int i = 0; i < grid.Tokens.Count(); i++)
+            for (int i = 0; i < grid.Tokens.Length; i++)
             {
                 this.Tokens[i] = new Token(grid.Tokens[i]);
             }
@@ -43,7 +43,7 @@
 
         public List<List<int>> GetColumns(int length)
         {
-            List<List<int>> result = new List<List<int>>();
+            List<List<int>> result = new();
 
             for (int x = 0; x < this.Length; x++)
             {
@@ -51,7 +51,7 @@
                 {
                     int startID = (y * this.Length) + x;
 
-                    List<int> column = new List<int>();
+                    List<int> column = new();
 
                     for (int increment = 0; increment < length; increment++)
                     {
@@ -67,7 +67,7 @@
 
         public List<List<int>> GetRows(int length)
         {
-            List<List<int>> result = new List<List<int>>();
+            List<List<int>> result = new();
 
             for (int x = 0; x < this.Breadth; x++)
             {
@@ -75,7 +75,7 @@
                 {
                     int startID = (x * this.Length) + y;
 
-                    List<int> row = new List<int>();
+                    List<int> row = new();
 
                     for (int increment = 0; increment < length; increment++)
                     {
@@ -91,7 +91,7 @@
 
         public List<List<int>> GetDiagonals(int length)
         {
-            List<List<int>> result = new List<List<int>>();
+            List<List<int>> result = new();
 
             // Positive diagonals
             for (int x = 0; x < this.Length - (length - 1); x++)
@@ -100,7 +100,7 @@
                 {
                     int startID = (y * this.Length) + x;
 
-                    List<int> diagonal = new List<int>();
+                    List<int> diagonal = new();
 
                     for (int increment = 0; increment < length; increment++)
                     {
@@ -118,7 +118,7 @@
                 {
                     int startID = (y * this.Length) + x;
 
-                    List<int> diagonal = new List<int>();
+                    List<int> diagonal = new();
 
                     for (int increment = 0; increment < length; increment++)
                     {

@@ -20,7 +20,7 @@
         {
             int tid = 0;
             int pid = 1;
-            Token clone = new Token(tid);
+            Token clone = new(tid);
             clone.Player = pid;
 
             Token t = new(clone);

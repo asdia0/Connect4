@@ -8,7 +8,7 @@
     {
         private static int[] ColumnOrder;
 
-        private static Dictionary<string, int> Moves = new Dictionary<string, int>();
+        private static readonly Dictionary<string, int> Moves = new();
 
         private static void SortColumnOrder(int length)
         {
@@ -87,7 +87,7 @@
 
         public static int FindBestColumn(int length, int breadth, int toWin)
         {
-            Game g = new Game(new Grid(length, breadth), 2, toWin);
+            Game g = new(new(length, breadth), 2, toWin);
 
             Moves.Clear();
 
@@ -95,7 +95,7 @@
 
             int score = NegaMax(g, int.MinValue, int.MaxValue, 0);
 
-            Dictionary<int, int> firstMoves = new Dictionary<int, int>();
+            Dictionary<int, int> firstMoves = new();
             for (int i = 0; i < length; i++)
             {
                 if (Moves.Keys.Contains($"{g}{i}"))

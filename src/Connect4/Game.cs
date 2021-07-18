@@ -216,7 +216,7 @@
         /// <returns>A value determinig if a move played in the column wins the game.</returns>
         public bool IsWinningMove(int column)
         {
-            Game g = new Game(this);
+            Game g = new(this);
             g.Play(column);
             return g.Winner != null;
         }
