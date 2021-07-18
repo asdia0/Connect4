@@ -41,6 +41,45 @@
         public List<Move> MoveList { get; set; }
 
         /// <summary>
+        /// Gets the winner.
+        /// </summary>
+        public int? Winner
+        {
+            get
+            {
+                List<List<int>> streaks = this.Grid.GetColumns(this.ToWin).Union(this.Grid.GetRows(this.ToWin).Union(this.Grid.GetDiagonals(this.ToWin))).ToList();
+
+                foreach (List<int> streak in streaks)
+                {
+                    int counter = 0;
+                    foreach (int id in streak)
+                    {
+                        int? player = this.Grid.Tokens[id].Player;
+                        if (player == null)
+                        {
+                            break;
+                        }
+                        else if (player != this.Grid.Tokens[streak[0]].Player)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            counter++;
+                        }
+                    }
+
+                    if (counter == this.ToWin)
+                    {
+                        return this.Grid.Tokens[streak[0]].Player;
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Initialises a new instance of the <see cref="Game"/> class.
         /// </summary>
         /// <param name="grid">The grid the game is being played on.</param>
@@ -127,43 +166,6 @@
         }
 
         /// <summary>
-        /// Gets the winner if the game has ended.
-        /// </summary>
-        /// <returns>The ID of the player who won.</returns>
-        public int? GetWinner()
-        {
-            List<List<int>> streaks = this.Grid.GetColumns(this.ToWin).Union(this.Grid.GetRows(this.ToWin).Union(this.Grid.GetDiagonals(this.ToWin))).ToList();
-
-            foreach (List<int> streak in streaks)
-            {
-                int counter = 0;
-                foreach (int id in streak)
-                {
-                    int? player = this.Grid.Tokens[id].Player;
-                    if (player == null)
-                    {
-                        break;
-                    }
-                    else if (player != this.Grid.Tokens[streak[0]].Player)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        counter++;
-                    }
-                }
-
-                if (counter == this.ToWin)
-                {
-                    return this.Grid.Tokens[streak[0]].Player;
-                }
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// Determines if the game is a draw.
         /// </summary>
         /// <returns>A value determining if the game is a draw.</returns>
@@ -221,7 +223,7 @@
         {
             Game g = new Game(this);
             g.Play(column);
-            if (g.GetWinner() != null)
+            if (g.Winner != null)
             {
                 return true;
             }
