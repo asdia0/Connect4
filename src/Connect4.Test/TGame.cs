@@ -29,5 +29,13 @@ namespace Connect4.Test
 
             Assert.AreEqual(2, game.ToWin);
         }
+
+        [TestMethod]
+        public void Players()
+        {
+            Game game = new(new(2, 2), 2, 2);
+
+            Assert.AreEqual(2, game.Players);
+        }
     }
 }
