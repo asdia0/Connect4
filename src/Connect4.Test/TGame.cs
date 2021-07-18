@@ -135,5 +135,24 @@ namespace Connect4.Test
             Assert.AreEqual(0, game.Turn);
             Assert.AreEqual(null, game.Grid.Tokens[2].Player);
         }
+
+        [TestMethod]
+        public void ToStringEmpty()
+        {
+            Grid grid = new(2, 2);
+            Game game = new(grid, 2, 2);
+
+            Assert.AreEqual(string.Empty, game.ToString());
+        }
+
+        [TestMethod]
+        public void ToStringPlaying()
+        {
+            Grid grid = new(2, 2);
+            Game game = new(grid, 2, 2);
+            game.Play(0);
+
+            Assert.AreEqual("0", game.ToString());
+        }
     }
 }
