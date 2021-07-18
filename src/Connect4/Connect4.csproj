@@ -13,10 +13,8 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.0</Version>
-    <PackageReleaseNotes>- Optimised code
-- Improved the alpha-beta pruning algorithm
-- Fixed various bugs</PackageReleaseNotes>
+    <Version>1.1.1</Version>
+    <PackageReleaseNotes>- Add documentation</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
