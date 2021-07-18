@@ -4,8 +4,8 @@
 
     public class Move
     {
-        public (int X, int Y) Coordinates;
-        public int Player;
+        public (int X, int Y) Coordinates { get; set; }
+        public int Player { get; set; }
 
         public Move(Grid grid, Token token)
         {
@@ -14,8 +14,7 @@
                 throw new Exception("Token.Player must not be null.");
             }
 
-            this.Coordinates.X = token.ID % grid.Length;
-            this.Coordinates.Y = grid.Breadth - (int)Math.Floor(decimal.Divide(token.ID, grid.Breadth));
+            this.Coordinates = (token.ID % grid.Length, grid.Breadth - (int)Math.Floor(decimal.Divide(token.ID, grid.Breadth)));
 
             this.Player = (int)token.Player;
         }

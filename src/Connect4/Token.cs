@@ -2,13 +2,13 @@
 {
     public class Token
     {
-        public int? Player = null;
+        public int? Player { get; set; }
 
-        public int ID;
+        public int ID { get; set; }
 
         public Token(int id)
         {
-            this.ID = id; ;
+            this.ID = id;
         }
 
         public Token(Token token)

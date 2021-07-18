@@ -6,13 +6,13 @@
 
     public class Game
     {
-        public int ToWin;
+        public int ToWin { get; set; }
 
-        public int Players;
+        public int Players { get; set; }
 
-        public int Turn;
+        public int Turn { get; set; }
 
-        public Grid Grid;
+        public Grid Grid { get; set; }
 
         public List<Move> MoveList = new List<Move>();
 

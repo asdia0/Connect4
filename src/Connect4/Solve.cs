@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Collections.Generic;
 
-    public class Solve
+    public static class Solve
     {
         private static int[] ColumnOrder;
 

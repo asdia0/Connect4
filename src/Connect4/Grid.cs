@@ -6,11 +6,11 @@
 
     public class Grid
     {
-        public Token[] Tokens;
+        public Token[] Tokens { get; set; }
 
-        public int Length;
+        public int Length { get; set; }
 
-        public int Breadth;
+        public int Breadth { get; set; }
 
         public Grid(int length, int breadth)
         {
