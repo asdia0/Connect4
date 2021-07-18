@@ -56,12 +56,16 @@
 
                 foreach (List<int> streak in streaks)
                 {
-                    int counter = 0;
                     foreach (int id in streak)
                     {
-                        if (streak.Select(i => this.Grid.Tokens[i].Player).Distinct().Count() == 1)
+                        List<int?> dist = streak.Select(i => this.Grid.Tokens[i].Player).Distinct().ToList();
+
+                        if (dist.Count == 1)
                         {
-                            return this.Grid.Tokens[streak[0]].Player;
+                            if (dist[0] != null)
+                            {
+                                return dist[0];
+                            }
                         }
                     }
                 }
