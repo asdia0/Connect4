@@ -209,16 +209,14 @@
         /// <returns>A value determining if the column is full.</returns>
         public bool IsFilled(int column)
         {
-            try
+            int[] tokens = new int[this.Grid.Breadth];
+
+            for (int row = 0; row < this.Grid.Breadth; row++)
             {
-                Game g = new Game(this);
-                g.Play(column);
-                return true;
+                tokens[row] = (row * this.Grid.Length) + column;
             }
-            catch
-            {
-                return false;
-            }
+
+            return !tokens.Select(i => this.Grid.Tokens[i]).Where(i => i.Player == null).Any();
         }
 
         /// <summary>
