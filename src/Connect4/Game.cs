@@ -22,7 +22,13 @@
         /// <summary>
         /// Gets or sets the ID of the current player.
         /// </summary>
-        public int Turn { get; set; }
+        public int Turn
+        {
+            get
+            {
+                return this.MoveList.Count % this.Players;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the grid the game is being played on.
@@ -49,7 +55,6 @@
                 throw new Exception("Number of players must be greater than or equal to 2.");
             }
 
-            this.Turn = 0;
             this.Grid = grid;
             this.Players = players;
             this.ToWin = toWin;
@@ -63,7 +68,6 @@
         {
             this.ToWin = game.ToWin;
             this.Players = game.Players;
-            this.Turn = 0;
             this.Grid = new Grid(game.Grid.Length, game.Grid.Breadth);
 
             this.MoveList = new List<Move>();
@@ -93,11 +97,6 @@
                 {
                     this.Grid.Tokens[id].Player = this.Turn;
                     this.MoveList.Add(new Move(this.Grid, this.Grid.Tokens[id]));
-                    this.Turn++;
-                    if (this.Turn == this.Players)
-                    {
-                        this.Turn = 0;
-                    }
                     return;
                 }
             }
@@ -124,11 +123,6 @@
                 {
                     this.Grid.Tokens[id].Player = null;
                     this.MoveList.RemoveAt(MoveList.Count - 1);
-                    this.Turn--;
-                    if (this.Turn == 0)
-                    {
-                        this.Turn = this.Players;
-                    }
                     return;
                 }
             }
