@@ -58,6 +58,7 @@
             this.Grid = grid;
             this.Players = players;
             this.ToWin = toWin;
+            this.MoveList = new();
         }
 
         /// <summary>
