@@ -1,6 +1,5 @@
 ﻿namespace Connect4.Test
 {
-    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
