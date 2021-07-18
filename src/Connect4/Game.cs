@@ -220,5 +220,33 @@
             g.Play(column);
             return g.Winner != null;
         }
+
+        public int Evaluation(int player)
+        {
+            List<List<int>> streaks = this.Grid.GetColumns(this.ToWin).Union(this.Grid.GetRows(this.ToWin).Union(this.Grid.GetDiagonals(this.ToWin))).ToList();
+
+            int score = 0;
+
+            foreach (List<int> streak in streaks)
+            {
+                List<int?> tokens = streak.Select(i => this.Grid.Tokens[i].Player).ToList();
+                List<int?> dist = tokens.Distinct().ToList();
+                dist.Remove(null);
+
+                if (dist.Count == 1)
+                {
+                    if (dist[0] == player)
+                    {
+                        score += 10 / (this.ToWin - tokens.Where(i => i == player).Count());
+                    }
+                    else
+                    {
+                        score -= 10 / (this.ToWin - tokens.Where(i => i == player).Count());
+                    }
+                }
+            }
+
+            return score;
+        }
     }
 }

@@ -1,117 +1,102 @@
 ﻿namespace Connect4
 {
     using System;
+    using static System.Math;
     using System.Linq;
     using System.Collections.Generic;
 
     public static class Solve
     {
-        private static int[] ColumnOrder;
-
-        private static readonly Dictionary<string, int> Moves = new();
-
-        private static void SortColumnOrder(int length)
+        private static (int?, int) MiniMax(Game game, int depth, int alpha, int beta)
         {
-            ColumnOrder = new int[length];
-            for (int i = 0; i < length; i++)
+            bool maxPlayer = game.Turn % 2 == 0;
+
+            List<int> children = new();
+
+            for (int col = 0; col < game.Grid.Length; col++)
             {
-                ColumnOrder[i] = length / 2 + (1 - 2 * (i % 2)) * (i + 1) / 2;
+                if (!game.IsFilled(col))
+                {
+                    children.Add(col);
+                }
             }
-        }
-
-        private static int NegaMax(Game game, int alpha, int beta, int depth)
-        {
-            // Credits to http://blog.gamesolver.org/solving-connect-four/04-alphabeta/
-
-            Grid grid = game.Grid;
 
             if (game.Draw)
             {
-                return 0;
+                return (null, 0);
             }
 
-            // Player can win immediately
-            for (int x = 0; x < grid.Length; x++)
+            foreach (int child in children)
             {
-                if (game.IsFilled(x) && game.IsWinningMove(x))
+                if (game.IsWinningMove(child))
                 {
-                    return (grid.Length * grid.Breadth + 1 - game.MoveList.Count) / 2;
+                    return (child, maxPlayer ? int.MaxValue : int.MinValue);
                 }
             }
 
-            // Upper bound of score
-            int max = (grid.Length * grid.Breadth - 1 - game.MoveList.Count) / 2;
-
-            // Configure beta
-            if (beta > max)
+            if (depth == 0)
             {
-                beta = max;
-                if (alpha >= beta)
-                {
-                    return beta;
-                }
+                return (null, game.Evaluation(maxPlayer ? 0 : 1));
             }
 
-            // Get child scores
-            for (int x = 0; x < grid.Length; x++)
+            if (maxPlayer)
             {
-                if (game.IsFilled(ColumnOrder[x]))
+                int value = int.MinValue;
+                Dictionary<int, int> scores = new();
+
+                foreach (int child in children)
                 {
-                    game.Play(ColumnOrder[x]);
-
-                    int score = -NegaMax(game, -beta, -alpha, depth + 1);
-
-                    game.Undo(ColumnOrder[x]);
-
-                    if (Moves.Keys.Contains(game.ToString()))
+                    Game opp = new(game);
+                    opp.Play(child);
+                    int score = MiniMax(opp, depth - 1, alpha, beta).Item2;
+                    scores.Add(child, score);
+                    if (score > value)
                     {
-                        return Moves[game.ToString()];
+                        value = score;
                     }
-
-                    Moves.Add(game.ToString(), score);
-
-                    // Prune exploration if we find a better move
-                    if (score >= beta)
+                    alpha = Max(alpha, value);
+                    if (alpha >= beta)
                     {
-                        return score;
-                    }
-                    if (score > alpha)
-                    {
-                        alpha = score;
+                        break;
                     }
                 }
-            }
-
-            return alpha;
-        }
-
-        public static int FindBestColumn(int length, int breadth, int toWin)
-        {
-            Game g = new(new(length, breadth), 2, toWin);
-
-            Moves.Clear();
-
-            SortColumnOrder(length);
-
-            int score = NegaMax(g, int.MinValue, int.MaxValue, 0);
-
-            Dictionary<int, int> firstMoves = new();
-            for (int i = 0; i < length; i++)
-            {
-                if (Moves.Keys.Contains($"{g}{i}"))
-                {
-                    firstMoves.Add(i, Moves[$"{g}{i}"]);
-                }
-            }
-
-            if (g.Turn % 2 == 0)
-            {
-                return firstMoves.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
+                return (scores.Aggregate((l, r) => l.Value > r.Value ? l : r).Key, value);
             }
             else
             {
-                return firstMoves.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+                int value = int.MaxValue;
+                Dictionary<int, int> scores = new();
+
+                foreach (int child in children)
+                {
+                    Game opp = new(game);
+                    opp.Play(child);
+                    int score = MiniMax(opp, depth - 1, alpha, beta).Item2;
+                    scores.Add(child, score);
+                    if (score < value)
+                    {
+                        value = score;
+                    }
+                    beta = Max(beta, value);
+                    if (alpha >= beta)
+                    {
+                        break;
+                    }
+                }
+                return (scores.Aggregate((l, r) => l.Value > r.Value ? l : r).Key, value);
             }
+        }
+
+        public static (int?, int) FindBestColumn(Game g, int depth)
+        {
+            if (g.Draw || g.Winner != null || g.Players != 2)
+            {
+                throw new Exception("Invalid game");
+            }
+
+            (int?, int) eval = MiniMax(g, 2 * depth, int.MinValue, int.MaxValue);
+
+            return eval;
         }
     }
 }

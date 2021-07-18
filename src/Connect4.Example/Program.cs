@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Connect4.Example
 {
@@ -8,14 +6,21 @@ namespace Connect4.Example
     {
         static void Main()
         {
-            Grid grid = new(3, 3);
-            Game game = new(grid, 2, 2);
-            game.Play(0);
-            game.Play(0);
-            game.Play(2);
+            // Simulate a game of Connect 4
+            Grid grid = new(7, 6);
+            Game game = new(grid, 2, 4);
 
-            Console.WriteLine(grid);
-            Console.WriteLine(game.Winner);
+            while (true)
+            {
+                if (game.Draw || game.Winner != null)
+                {
+                    break;
+                }
+
+                (int?, int) e = Solve.FindBestColumn(game, 1);
+                Console.WriteLine(e);
+                game.Play((int)e.Item1);
+            }
         }
     }
 }
