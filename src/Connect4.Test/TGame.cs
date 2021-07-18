@@ -196,7 +196,7 @@ namespace Connect4.Test
             game.Play(0);
             game.Play(0);
 
-            Assert.AreEqual(false, game.IsWinningMove(1));
+            Assert.AreEqual(false, game.IsWinningMove(2));
         }
     }
 }
