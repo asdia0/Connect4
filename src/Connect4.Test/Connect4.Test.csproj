@@ -13,4 +13,8 @@
     <PackageReference Include="coverlet.collector" Version="1.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Connect4\Connect4.csproj" />
+  </ItemGroup>
+
 </Project>
