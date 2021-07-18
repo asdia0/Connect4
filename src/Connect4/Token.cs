@@ -1,6 +1,6 @@
 ﻿namespace Connect4
 {
-    public class Token
+    public struct Token
     {
         public int? Player { get; set; }
 
@@ -9,6 +9,7 @@
         public Token(int id)
         {
             this.ID = id;
+            this.Player = null;
         }
 
         public Token(Token token)
