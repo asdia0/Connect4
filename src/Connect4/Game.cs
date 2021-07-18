@@ -4,18 +4,42 @@
     using System.Linq;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Represents a game.
+    /// </summary>
     public class Game
     {
+        /// <summary>
+        /// Gets or sets the number of tokens needed in a row to win.
+        /// </summary>
         public int ToWin { get; set; }
 
+        /// <summary>
+        /// Gets or sets the number of players in the game.
+        /// </summary>
         public int Players { get; set; }
 
+        /// <summary>
+        /// Gets or sets the ID of the current player.
+        /// </summary>
         public int Turn { get; set; }
 
+        /// <summary>
+        /// Gets or sets the grid the game is being played on.
+        /// </summary>
         public Grid Grid { get; set; }
+        
+        /// <summary>
+        /// Gets or sets a list of moves played.
+        /// </summary>
+        public List<Move> MoveList { get; set; }
 
-        public List<Move> MoveList = new List<Move>();
-
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Game"/> class.
+        /// </summary>
+        /// <param name="grid">The grid the game is being played on.</param>
+        /// <param name="players">The number of players in the game.</param>
+        /// <param name="toWin">The number of tokens needed in a row to win.</param>
         public Game(Grid grid, int players, int toWin)
         {
             // Multiple players
@@ -31,6 +55,10 @@
             this.ToWin = toWin;
         }
 
+        /// <summary>
+        /// Iniitalises a new instance of the <see cref="Game"/> from another game.
+        /// </summary>
+        /// <param name="game">The game to clone.</param>
         public Game(Game game)
         {
             this.ToWin = game.ToWin;
@@ -46,6 +74,10 @@
             }
         }
 
+        /// <summary>
+        /// Places a token in a column.
+        /// </summary>
+        /// <param name="column">The column to play.</param>
         public void Play(int column)
         {
             int[] tokens = new int[this.Grid.Breadth];
@@ -73,6 +105,10 @@
             throw new Exception("Column is full.");
         }
 
+        /// <summary>
+        /// Removes the last token placed in a column
+        /// </summary>
+        /// <param name="column">The column to remove the token from.</param>
         public void Undo(int column)
         {
             int[] tokens = new int[this.Grid.Breadth];
@@ -98,6 +134,10 @@
             }
         }
 
+        /// <summary>
+        /// Gets the winner if the game has ended.
+        /// </summary>
+        /// <returns>The ID of the player who won.</returns>
         public int? GetWinner()
         {
             List<List<int>> streaks = this.Grid.GetColumns(this.ToWin).Union(this.Grid.GetRows(this.ToWin).Union(this.Grid.GetDiagonals(this.ToWin))).ToList();
@@ -131,6 +171,10 @@
             return null;
         }
 
+        /// <summary>
+        /// Determines if the game is a draw.
+        /// </summary>
+        /// <returns>A value determining if the game is a draw.</returns>
         public bool IsDraw()
         {
             if (this.MoveList.Count == this.Grid.Breadth * this.Grid.Length)
@@ -141,6 +185,10 @@
             return false;
         }
 
+        /// <summary>
+        /// Converts the game to a string.
+        /// </summary>
+        /// <returns>A string version of the game.</returns>
         public override string ToString()
         {
             string s = string.Empty;
@@ -153,6 +201,11 @@
             return s;
         }
 
+        /// <summary>
+        /// Determines if the column is full.
+        /// </summary>
+        /// <param name="column">The column to check.</param>
+        /// <returns>A value determining if the column is full.</returns>
         public bool IsFilled(int column)
         {
             try
@@ -167,6 +220,11 @@
             }
         }
 
+        /// <summary>
+        /// Determines if a move played in the column wins the game.
+        /// </summary>
+        /// <param name="column">The column to check.</param>
+        /// <returns>A value determinig if a move played in the column wins the game.</returns>
         public bool IsWinningMove(int column)
         {
             Game g = new Game(this);
