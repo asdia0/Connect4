@@ -48,8 +48,6 @@
         /// <param name="toWin">The number of tokens needed in a row to win.</param>
         public Game(Grid grid, int players, int toWin)
         {
-            // Multiple players
-
             if (players < 2)
             {
                 throw new Exception("Number of players must be greater than or equal to 2.");
