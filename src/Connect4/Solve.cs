@@ -6,7 +6,7 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// This class contains methods to find the move.
+    /// This class contains methods to find the best move.
     /// </summary>
     public static class Solve
     {
