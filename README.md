@@ -1,6 +1,6 @@
-# Connect4
+# Status: `UNMAINTAINED`
 
-![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)
+# Connect4
 
 A C# library to play and solve Connect 4.
 
